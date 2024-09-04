@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Realidade Aumentada para Educação Musical Infatil</title>
+
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+      integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+
+  <body>
+    <a-scene
+      embedded
+      arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    >
+      <a-assets>
+        <img id="bateria" src="./assets/bateria.png" />
+        <img id="violao" src="./assets/violao.png" />
+        <img id="microfone" src="./assets/microfone.png" />
+        <img id="piano" src="./assets/piano.png" />
+      </a-assets>
+
+      <a-marker id="marcador-bateria" type="barcode" value="0">
+        <a-image src="#bateria" rotation="90 0 0"></a-image>
+      </a-marker>
+
+      <a-marker id="marcador-violao" type="barcode" value="1">
+        <a-image src="#violao" rotation="90 0 0"></a-image>
+      </a-marker>
+
+      <a-marker id="marcador-microfone" type="barcode" value="2">
+        <a-image src="#microfone" rotation="90 0 0"></a-image>
+      </a-marker>
+
+      <a-marker id="marcador-piano" type="barcode" value="3">
+        <a-image src="#piano" rotation="90 0 0"></a-image>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      let bateria = new Howl({
+        src: ["./audio/bateria.mp3"]
+      });
+
+      let violao = new Howl({
+        src: ["./audio/violao.mp3"]
+      });
+
+      let microfone = new Howl({
+        src: ["./audio/microfone.mp3"]
+      });
+
+      let piano = new Howl({
+        src: ["./audio/piano.mp3"]
+      });
+
+      bateria.play();
+      violao.play();
+      microfone.play();
+      piano.play();
+
+      window.onload = function () {
+        let marcadorViolao = document.getElementById("marcador-violao");
+        marcadorViolao.addEventListener("markerFound", function () {
+          violao.mute(false);
+        });
+        marcadorViolao.addEventListener("markerLost", function () {
+          violao.mute(true);
+        });
+
+        let marcadorBateria = document.getElementById("marcador-bateria");
+        marcadorBateria.addEventListener("markerFound", function () {
+          bateria.mute(false);
+        });
+        marcadorBateria.addEventListener("markerLost", function () {
+          bateria.mute(true);
+        });
+
+        let marcadorMicrofone = document.getElementById("marcador-microfone");
+        marcadorMicrofone.addEventListener("markerFound", function () {
+          microfone.mute(false);
+        });
+        marcadorMicrofone.addEventListener("markerLost", function () {
+          microfone.mute(true);
+        });
+
+        let marcadorPiano = document.getElementById("marcador-piano");
+        marcadorPiano.addEventListener("markerFound", function () {
+          piano.mute(false);
+        });
+        marcadorPiano.addEventListener("markerLost", function () {
+          piano.mute(true);
+        });
+      };
+    </script>
+  </body>
+</html>
