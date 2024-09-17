@@ -22,40 +22,40 @@
       arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
     >
       <a-assets>
-        <img id="bateria" src="./assets/bateria.png" />
-        <img id="violao" src="./assets/violao.png" />
-        <img id="microfone" src="./assets/microfone.png" />
-        <img id="piano" src="./assets/piano.png" />
+        <img id="bateria" src="assets/bateria.png" />
+        <img id="violao" src="assets/violao.png" />
+        <img id="microfone" src="assets/microfone.png" />
+        <img id="piano" src="assets/piano.png" />
       </a-assets>
 
-      <a-marker id="marcador-bateria" type="barcode" value="0" emitevents="true">
+      <a-marker id="marcador-bateria" type="barcode" value="0">
         <a-plane 
           position="0 0 0" 
-          rotation="90 0 0"
+          rotation="-90 0 0"
           material="src: #bateria;">
         </a-plane>
       </a-marker>
 
-      <a-marker id="marcador-violao" type="barcode" value="1" emitevents="true">
+      <a-marker id="marcador-violao" type="barcode" value="1">
         <a-plane 
           position="0 0 0" 
-          rotation="90 0 0"
+          rotation="-90 0 0"
           material="src: #violao;">
         </a-plane>
       </a-marker>
 
-      <a-marker id="marcador-microfone" type="barcode" value="2" emitevents="true">
+      <a-marker id="marcador-microfone" type="barcode" value="2">
         <a-plane 
           position="0 0 0" 
-          rotation="90 0 0"
+          rotation="-90 0 0"
           material="src: #microfone;">
         </a-plane>
       </a-marker>
 
-      <a-marker id="marcador-piano" type="barcode" value="3" emitevents="true">
+      <a-marker id="marcador-piano" type="barcode" value="3">
         <a-plane 
           position="0 0 0" 
-          rotation="90 0 0"
+          rotation="-90 0 0"
           material="src: #piano;">
         </a-plane>
       </a-marker>
