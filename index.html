@@ -15,15 +15,26 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
     <a-assets>
+      <a-asset-item id="guitarra" src="./models/guitar.gltf"></a-asset-item>
       <img id="bateria" src="./assets/bateria.png" />
       <img id="violao" src="./assets/violao.png" />
       <img id="microfone" src="./assets/microfone.png" />
       <img id="piano" src="./assets/piano.png" />
     </a-assets>
-
-    <a-marker id="marcador-bateria" type="barcode" value="0">
-      <a-image src="#bateria" rotation="-90 0 0" position="0 0 0" />
+    
+    <a-marker id="marcador-guitarra" type="barcode" value="0">
+      <a-entity   
+        position="0 0 0" 
+        rotation="0 0 0"
+        scale="0.10 0.10 0.10"
+        gltf-model="#guitarra" 
+      >
+      </a-entity>
     </a-marker>
+
+    <!-- <a-marker id="marcador-bateria" type="barcode" value="0">
+      <a-image src="#bateria" rotation="-90 0 0" position="0 0 0" />
+    </a-marker> -->
 
     <a-marker id="marcador-violao" type="barcode" value="1">
       <a-image src="#violao" rotation="-90 0 0" position="0 0 0" />
@@ -41,6 +52,10 @@
   </a-scene>
 
   <script>
+      let guitarra = new Howl({
+        src: ["./audio/guitarra.mp3"]
+      });
+
       let bateria = new Howl({
         src: ["./audio/bateria.mp3"]
       });
@@ -53,16 +68,20 @@
         src: ["./audio/microfone.mp3"]
       });
 
-      let piano = new Howl({
-        src: ["./audio/piano.mp3"]
-      });
-
+      guitarra.play();
       bateria.play();
       violao.play();
       microfone.play();
-      piano.play();
 
       window.onload = function () {
+        let marcadorGuitarra = document.getElementById("marcador-guitarra");
+        marcadorGuitarra.addEventListener("markerFound", function () {
+          guitarra.mute(false);
+        });
+        marcadorGuitarra.addEventListener("markerLost", function () {
+          guitarra.mute(true);
+        });
+
         let marcadorViolao = document.getElementById("marcador-violao");
         marcadorViolao.addEventListener("markerFound", function () {
           violao.mute(false);
@@ -85,14 +104,6 @@
         });
         marcadorMicrofone.addEventListener("markerLost", function () {
           microfone.mute(true);
-        });
-
-        let marcadorPiano = document.getElementById("marcador-piano");
-        marcadorPiano.addEventListener("markerFound", function () {
-          piano.mute(false);
-        });
-        marcadorPiano.addEventListener("markerLost", function () {
-          piano.mute(true);
         });
       };
     </script>
