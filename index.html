@@ -6,17 +6,15 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,shrink-to-fit=no,user-scalable=no,minimal-ui,viewport-fit=cover">
   <title>Realidade Aumentada para Educação Musical Infatil</title>
 
-  <script src="./js/aframe.min.js"></script>
-  <script src="./js/aframe-ar.js"></script>
-  <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
     <a-assets>
-      <img id="imagem" src="./assets/image.png" />
       <img id="bateria" src="./assets/bateria.png" />
       <img id="violao" src="./assets/violao.png" />
       <img id="microfone" src="./assets/microfone.png" />
@@ -24,8 +22,7 @@
     </a-assets>
 
     <a-marker id="marcador-bateria" type="barcode" value="0">
-      <a-plane position="0 0 0" rotation="-90 0 0" material="src: #imagem;" geometry>
-      </a-plane>
+      <a-image src="#bateria" rotation="90 0 0" position="0 0 0" />
     </a-marker>
 
     <a-marker id="marcador-violao" type="barcode" value="1">
