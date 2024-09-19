@@ -15,37 +15,31 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
     <a-assets>
-      <a-asset-item id="guitarra" src="./models/guitar.gltf"></a-asset-item>
-      <img id="bateria" src="./assets/bateria.png" />
+      <img id="guitarra" src="./assets/guitarra.png" />
+      <img id="baixo" src="./assets/baixo.png" />
       <img id="violao" src="./assets/violao.png" />
+      <img id="bateria" src="./assets/bateria.png" />
       <img id="microfone" src="./assets/microfone.png" />
-      <img id="piano" src="./assets/piano.png" />
     </a-assets>
     
     <a-marker id="marcador-guitarra" type="barcode" value="0">
-      <a-entity   
-        position="0 0 0" 
-        rotation="0 0 0"
-        scale="0.10 0.10 0.10"
-        gltf-model="#guitarra" 
-      >
-      </a-entity>
+      <a-image src="#guitarra" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
-    <!-- <a-marker id="marcador-bateria" type="barcode" value="0">
-      <a-image src="#bateria" rotation="-90 0 0" position="0 0 0" />
-    </a-marker> -->
+    <a-marker id="marcador-baixo" type="barcode" value="1">
+      <a-image src="#baixo" rotation="-90 0 0" position="0 0 0" />
+    </a-marker>
 
-    <a-marker id="marcador-violao" type="barcode" value="1">
+    <a-marker id="marcador-violao" type="barcode" value="10">
       <a-image src="#violao" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
-    <a-marker id="marcador-microfone" type="barcode" value="2">
-      <a-image src="#microfone" rotation="-90 0 0" position="0 0 0" />
+    <a-marker id="marcador-bateria" type="barcode" value="11">
+      <a-image src="#bateria" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
-    <a-marker id="marcador-piano" type="barcode" value="3">
-      <a-image src="#piano" rotation="-90 0 0" position="0 0 0" />
+    <a-marker id="marcador-microfone" type="barcode" value="12">
+      <a-image src="#microfone" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
     <a-entity camera></a-entity>
@@ -56,12 +50,16 @@
         src: ["./audio/guitarra.mp3"]
       });
 
-      let bateria = new Howl({
-        src: ["./audio/bateria.mp3"]
+      let baixo = new Howl({
+        src: ["./audio/baixo.mp3"]
       });
 
       let violao = new Howl({
         src: ["./audio/violao.mp3"]
+      });
+
+      let bateria = new Howl({
+        src: ["./audio/bateria.mp3"]
       });
 
       let microfone = new Howl({
@@ -69,8 +67,9 @@
       });
 
       guitarra.play();
-      bateria.play();
+      baixo.play();
       violao.play();
+      bateria.play();
       microfone.play();
 
       window.onload = function () {
@@ -80,6 +79,14 @@
         });
         marcadorGuitarra.addEventListener("markerLost", function () {
           guitarra.mute(true);
+        });
+
+        let marcadorBaixo = document.getElementById("marcador-baixo");
+        marcadorBaixo.addEventListener("markerFound", function () {
+          baixo.mute(false);
+        });
+        marcadorBaixo.addEventListener("markerLost", function () {
+          baixo.mute(true);
         });
 
         let marcadorViolao = document.getElementById("marcador-violao");
