@@ -17,6 +17,7 @@
     arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
   >
     <a-assets>
+      <img id="imagem" src="./assets/image.png" />
       <img id="bateria" src="./assets/bateria.png" />
       <img id="violao" src="./assets/violao.png" />
       <img id="microfone" src="./assets/microfone.png" />
@@ -24,7 +25,7 @@
     </a-assets>
 
     <a-marker id="marcador-bateria" type="barcode" value="0">
-      <a-image src="#bateria" />
+      <a-image src="#imagem" rotation="-90 0 0" position="0 0 0"/>
     </a-marker>
 
     <a-marker id="marcador-violao" type="barcode" value="1">
