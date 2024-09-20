@@ -15,11 +15,12 @@
 <body style="margin: 0px; overflow: hidden;">
   <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
     <a-assets>
+      <img id="bateria" src="./assets/bateria.png" />
+      <img id="violao" src="./assets/violao.png" />
       <img id="guitarra" src="./assets/guitarra.png" />
       <img id="baixo" src="./assets/baixo.png" />
-      <img id="violao" src="./assets/violao.png" />
-      <img id="bateria" src="./assets/bateria.png" />
       <img id="microfone" src="./assets/microfone.png" />
+      <img id="banda" src="./assets/banda.png" />
     </a-assets>
 
     <a-marker id="marcador-bateria" type="barcode" value="0">
@@ -42,10 +43,22 @@
       <a-image src="#microfone" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
+    <a-marker id="marcador-banda" type="barcode" value="13">
+      <a-image src="#banda" rotation="-90 0 0" position="0 0 0" />
+    </a-marker>
+
     <a-entity camera></a-entity>
   </a-scene>
 
   <script>
+      let bateria = new Howl({
+        src: ["./audio/bateria.mp3"]
+      });
+
+      let violao = new Howl({
+        src: ["./audio/violao.mp3"]
+      });
+
       let guitarra = new Howl({
         src: ["./audio/guitarra.mp3"]
       });
@@ -54,19 +67,27 @@
         src: ["./audio/baixo.mp3"]
       });
 
-      let violao = new Howl({
-        src: ["./audio/violao.mp3"]
-      });
-
-      let bateria = new Howl({
-        src: ["./audio/bateria.mp3"]
-      });
-
       let microfone = new Howl({
         src: ["./audio/microfone.mp3"]
       });
 
       window.onload = function () {
+        let marcadorBateria = document.getElementById("marcador-bateria");
+        marcadorBateria.addEventListener("markerFound", function () {
+          bateria.play();
+        });
+        marcadorBateria.addEventListener("markerLost", function () {
+          bateria.stop();
+        });
+
+        let marcadorViolao = document.getElementById("marcador-violao");
+        marcadorViolao.addEventListener("markerFound", function () {
+          violao.play();
+        });
+        marcadorViolao.addEventListener("markerLost", function () {
+          violao.stop();
+        });
+
         let marcadorGuitarra = document.getElementById("marcador-guitarra");
         marcadorGuitarra.addEventListener("markerFound", function () {
           guitarra.play();
@@ -83,27 +104,27 @@
           baixo.stop();
         });
 
-        let marcadorViolao = document.getElementById("marcador-violao");
-        marcadorViolao.addEventListener("markerFound", function () {
-          violao.play();
-        });
-        marcadorViolao.addEventListener("markerLost", function () {
-          violao.stop();
-        });
-
-        let marcadorBateria = document.getElementById("marcador-bateria");
-        marcadorBateria.addEventListener("markerFound", function () {
-          bateria.play();
-        });
-        marcadorBateria.addEventListener("markerLost", function () {
-          bateria.stop();
-        });
-
         let marcadorMicrofone = document.getElementById("marcador-microfone");
         marcadorMicrofone.addEventListener("markerFound", function () {
           microfone.play();
         });
         marcadorMicrofone.addEventListener("markerLost", function () {
+          microfone.stop();
+        });
+
+        let marcadorBanda = document.getElementById("marcador-banda");
+        marcadorBanda.addEventListener("markerFound", function () {
+          bateria.play();
+          violao.play();
+          guitarra.play();
+          baixo.play();
+          microfone.play();
+        });
+        marcadorBanda.addEventListener("markerLost", function () {
+          bateria.stop();
+          violao.stop();
+          guitarra.stop();
+          baixo.stop();
           microfone.stop();
         });
       };
