@@ -21,21 +21,21 @@
       <img id="bateria" src="./assets/bateria.png" />
       <img id="microfone" src="./assets/microfone.png" />
     </a-assets>
-    
-    <a-marker id="marcador-guitarra" type="barcode" value="0">
-      <a-image src="#guitarra" rotation="-90 0 0" position="0 0 0" />
+
+    <a-marker id="marcador-bateria" type="barcode" value="0">
+      <a-image src="#bateria" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
-    <a-marker id="marcador-baixo" type="barcode" value="1">
-      <a-image src="#baixo" rotation="-90 0 0" position="0 0 0" />
-    </a-marker>
-
-    <a-marker id="marcador-violao" type="barcode" value="10">
+    <a-marker id="marcador-violao" type="barcode" value="1">
       <a-image src="#violao" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
-    <a-marker id="marcador-bateria" type="barcode" value="11">
-      <a-image src="#bateria" rotation="-90 0 0" position="0 0 0" />
+    <a-marker id="marcador-guitarra" type="barcode" value="10">
+      <a-image src="#guitarra" rotation="-90 0 0" position="0 0 0" />
+    </a-marker>
+
+    <a-marker id="marcador-baixo" type="barcode" value="11">
+      <a-image src="#baixo" rotation="-90 0 0" position="0 0 0" />
     </a-marker>
 
     <a-marker id="marcador-microfone" type="barcode" value="12">
@@ -66,51 +66,45 @@
         src: ["./audio/microfone.mp3"]
       });
 
-      guitarra.play();
-      baixo.play();
-      violao.play();
-      bateria.play();
-      microfone.play();
-
       window.onload = function () {
         let marcadorGuitarra = document.getElementById("marcador-guitarra");
         marcadorGuitarra.addEventListener("markerFound", function () {
-          guitarra.mute(false);
+          guitarra.play();
         });
         marcadorGuitarra.addEventListener("markerLost", function () {
-          guitarra.mute(true);
+          guitarra.stop();
         });
 
         let marcadorBaixo = document.getElementById("marcador-baixo");
         marcadorBaixo.addEventListener("markerFound", function () {
-          baixo.mute(false);
+          baixo.play();
         });
         marcadorBaixo.addEventListener("markerLost", function () {
-          baixo.mute(true);
+          baixo.stop();
         });
 
         let marcadorViolao = document.getElementById("marcador-violao");
         marcadorViolao.addEventListener("markerFound", function () {
-          violao.mute(false);
+          violao.play();
         });
         marcadorViolao.addEventListener("markerLost", function () {
-          violao.mute(true);
+          violao.stop();
         });
 
         let marcadorBateria = document.getElementById("marcador-bateria");
         marcadorBateria.addEventListener("markerFound", function () {
-          bateria.mute(false);
+          bateria.play();
         });
         marcadorBateria.addEventListener("markerLost", function () {
-          bateria.mute(true);
+          bateria.stop();
         });
 
         let marcadorMicrofone = document.getElementById("marcador-microfone");
         marcadorMicrofone.addEventListener("markerFound", function () {
-          microfone.mute(false);
+          microfone.play();
         });
         marcadorMicrofone.addEventListener("markerLost", function () {
-          microfone.mute(true);
+          microfone.stop();
         });
       };
     </script>
